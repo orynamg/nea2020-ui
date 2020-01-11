@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+}
+
+.item {
+  margin: 1rem;
+  padding: 1rem;
+  border: #555555 1px solid;
+  background: #cccccc;
+  text-align: left;
+}
+
+.event {
+  margin: 1rem;
+  text-align: left;
+  border-top: blue 1px solid;
+}
+
+.tweet {
+  margin: 1rem;
+  text-align: left;
+  border-top: gray 1px solid;
+}
