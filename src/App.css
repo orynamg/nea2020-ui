@@ -59,5 +59,8 @@
 .tweet {
   margin: 1rem;
   text-align: left;
-  border-top: gray 1px solid;
+  /* border-top: gray 1px solid; */
+}
+.tweet a:hover{
+  text-decoration: none;
 }

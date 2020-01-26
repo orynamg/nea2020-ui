@@ -1,14 +1,26 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faCoffee, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 
 const Tweet = ({tweet}) => (
     <div className="tweet">
-        <div>{tweet.text}</div>
-        <div>{tweet.hashtags}</div>
-        <div>{tweet.user}</div>
-        <a href={tweet.url}>link</a>
-        <div>{tweet.published_at}</div>
-        <div>{tweet.category_id}</div>
-        <div>{tweet.event_id}</div>
+        <span>
+          <FontAwesomeIcon icon={faTwitter} color="rgb(73, 161, 235)" />
+          <small>
+            @{tweet.user}
+            <em> says on {(new Date(tweet.published_at)).toLocaleDateString()}:</em>
+          </small>
+        </span>
+        <p>
+          <a href={tweet.url}>
+            {tweet.text}
+            {/* <FontAwesomeIcon icon={faExternalLinkAlt} color="LightGray"/> */}
+          </a>
+        </p>
+        {/* <div>{tweet.hashtags}</div> */}
+        {/* <div>{tweet.category_id}</div> */}
+        {/* <div>{tweet.event_id}</div> */}
     </div>
 )
 

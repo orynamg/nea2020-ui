@@ -35,7 +35,7 @@ const Dashboard = () => {
     if (!ready) return <p>Loading...</p>
     if (error) return <p>Oops, something went wrong!</p>
     return (
-        <div>
+        <div width="90%">
             <EventList list={events} news={news} tweets={tweets}/>
         </div>
     )

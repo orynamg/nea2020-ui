@@ -1,15 +1,18 @@
 import React from 'react';
 import NewsList from './News'
 import TweetList from './Tweets'
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 const Event = ({event, news, tweets}) =>(
-    <div className="event">
-        <div>{event.name}</div>
-        <div>{event.keywords}</div>
-        <div>{event.created_at}</div>
+    <Jumbotron>
+    {/* <div className="event"> */}
+        <h2>{event.name}</h2>
+        {/* <div>{event.keywords}</div> */}
+        <small><em>{event.created_at}</em></small>
         <NewsList list={news} />
         <TweetList list={tweets} />
-    </div>
+    {/* </div> */}
+    </Jumbotron>
 )
 
 const EventList = ({list, news, tweets}) => (
