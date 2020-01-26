@@ -1,6 +1,10 @@
 import React from 'react';
 // import NewsList from './News'
 import EventList from './Events'
+import EventCloud from './EventCloud'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const Dashboard = () => {
     const [ready, setReady] = React.useState(false)
@@ -35,8 +39,15 @@ const Dashboard = () => {
     if (!ready) return <p>Loading...</p>
     if (error) return <p>Oops, something went wrong!</p>
     return (
-        <div width="90%">
-            <EventList list={events} news={news} tweets={tweets}/>
+        // <Container>
+        //     <Row>
+        //         <Col><EventCloud events={events} /></Col>
+        //         <Col><EventList events={events} news={news} tweets={tweets}/></Col>
+        //     </Row>
+        // </Container>
+        <div className="grid">
+            <EventCloud events={events} />
+            <EventList events={events} news={news} tweets={tweets}/>
         </div>
     )
 }
