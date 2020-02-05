@@ -42,8 +42,12 @@ const Dashboard = () => {
     return (
 
         <div className="grid">
-            <EventCloud events={events} />
-            <EventList events={events} news={news} tweets={tweets}/>
+            <div className="item">
+                <EventCloud events={events} />
+            </div>
+            <div className="item">
+                <EventList events={events} news={news} tweets={tweets}/>
+            </div>
         </div>
         
     )

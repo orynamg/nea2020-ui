@@ -18,7 +18,9 @@ const EventCloud = ({events}) => {
     }
   
     return (
-        <div style={{ height: 600, width: 900 }}>
+        // <div>Left Pane</div>
+        // <div style={{ height: 600, width: 600 }}>
+        <div className="cloud">
             <ReactWordcloud options={options} words={cloud} />
         </div>
     )

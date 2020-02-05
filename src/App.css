@@ -39,16 +39,16 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(2, auto);
-  /* grid-template-columns: 2fr 1fr; */
+  /* grid-template-columns: repeat(2, auto); */
+  grid-template-columns: 1fr 1fr;
 }
 
 .item {
   margin: 1rem;
   padding: 1rem;
-  border: #555555 1px solid;
-  background: #cccccc;
-  text-align: left;
+  /* border: #555555 1px solid; */
+  /* background: #cccccc;
+  text-align: left; */
 }
 
 .event {
@@ -64,4 +64,9 @@
 }
 .tweet a:hover{
   text-decoration: none;
+}
+
+.cloud {
+  padding-top: 5rem;
+  align-content: center;
 }
