@@ -70,3 +70,27 @@
   padding-top: 5rem;
   align-content: center;
 }
+
+#content {
+  margin: 0;
+  overflow: hidden;
+  height:100%;
+}
+#left {
+  /* padding: 1rem; */
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  overflow-y: scroll; 
+}
+#right {
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: scroll;
+  width: 50%;
+}

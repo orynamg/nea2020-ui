@@ -41,11 +41,11 @@ const Dashboard = () => {
 
     return (
 
-        <div className="grid">
-            <div className="item">
+        <div id="content">
+            <div id="left">
                 <EventCloud events={events} />
             </div>
-            <div className="item">
+            <div id="right">
                 <EventList events={events} news={news} tweets={tweets}/>
             </div>
         </div>
