@@ -7,7 +7,7 @@ const Event = ({event, news, tweets}) => {
   return (
     <Jumbotron>
     {/* <div className="event"> */}
-        <h2>{event.name}</h2>
+        <h2>{capitalise(event.name)}</h2>
         {/* <div>{event.keywords}</div> */}
         <small><em>{event.created_at}</em></small>
         <NewsList list={news} />
@@ -27,5 +27,13 @@ const EventList = ({events, news, tweets}) => (
     )}
   </ul>
 )
+
+function capitalise(s) {
+  const words = s.split(" ")
+  const capWords = words.map(word => {
+     return word[0].toUpperCase() + word.slice(1)
+  })
+  return capWords.join(" ")
+}
 
 export default EventList;

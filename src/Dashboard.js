@@ -15,7 +15,7 @@ const Dashboard = () => {
 
     const fetchData = async () => {
         try {
-            //await sleep(2000);
+            // await sleep(2000);
 
             const response = await fetch("http://localhost:8000/news?limit=1000");
             const data = await response.json();
@@ -38,22 +38,19 @@ const Dashboard = () => {
 
     if (!ready) return <p>Loading...</p>
     if (error) return <p>Oops, something went wrong!</p>
+
     return (
-        // <Container>
-        //     <Row>
-        //         <Col><EventCloud events={events} /></Col>
-        //         <Col><EventList events={events} news={news} tweets={tweets}/></Col>
-        //     </Row>
-        // </Container>
+
         <div className="grid">
             <EventCloud events={events} />
             <EventList events={events} news={news} tweets={tweets}/>
         </div>
+        
     )
 }
 
-// function sleep(duration) {
-//     return new Promise(resolve => setTimeout(resolve, duration));
-// }
+function sleep(duration) {
+    return new Promise(resolve => setTimeout(resolve, duration));
+}
 
 export default Dashboard;

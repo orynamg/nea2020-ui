@@ -8,7 +8,7 @@ const EventCloud = ({events}) => {
     events.map(event => {
       const words = event.name.split(" ");
       words.map(word => {
-        cloud.push({text: word, value: Math.floor(100/words.length)})
+        cloud.push({text: word, value: Math.floor(200/words.length + 50)})
       })  
     })
   
