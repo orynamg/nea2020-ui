@@ -6,23 +6,23 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Nav from 'react-bootstrap/Nav'
-// import { BehaviorSubject } from 'rxjs'
+import { BehaviorSubject } from 'rxjs'
+import { skip, filter } from 'rxjs/operators'
 
-// const activeCategorySubject = new BehaviorSubject(0);
+const activeCategorySubject = new BehaviorSubject(0);
 
-// const useSharedState = subject => {
-//     const [value, setState] = useState(subject.getValue());
-//     useEffect(() => {
-//       const sub = subject.pipe(skip(1)).subscribe(s => setState(s));
-//       return () => sub.unsubscribe();
-//     });
-//     const newSetState = state => subject.next(state);
-//     return [value, newSetState];   
-// };
+const useSharedState = subject => {
+    const [value, setState] = React.useState(subject.getValue());
+    React.useEffect(() => {
+      const sub = subject.pipe(skip(1)).subscribe(s => setState(s));
+      return () => sub.unsubscribe();
+    });
+    const newSetState = state => subject.next(state);
+    return [value, newSetState];   
+};
 
 const CategoryBar = ({active}) => {
-    // const [cat, setCat] = useSharedState(activeCategorySubject)
-    const setCat = cat => console.log("set active index to" + cat)
+    const [cat, setCat] = useSharedState(activeCategorySubject)
     console.log("active index is: " + active)
 
     const categories = ["all", "business", "entertainment", "health", "tech & sci", "environment", "lgbt", "youth"]
@@ -48,8 +48,7 @@ const Dashboard = () => {
     const [tweets, setTweets] = React.useState([])
     const [error, setError] = React.useState(null)
 
-    // const [cat, setCat] = useSharedState(activeCategorySubject)
-    const cat = 0
+    const [cat, setCat] = useSharedState(activeCategorySubject)
 
     const fetchData = async () => {
         try {
