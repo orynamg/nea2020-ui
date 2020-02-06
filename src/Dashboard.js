@@ -6,20 +6,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Nav from 'react-bootstrap/Nav'
-import { BehaviorSubject } from 'rxjs'
-import { skip, filter } from 'rxjs/operators'
-
-const activeCategorySubject = new BehaviorSubject(0);
-
-const useSharedState = subject => {
-    const [value, setState] = React.useState(subject.getValue());
-    React.useEffect(() => {
-      const sub = subject.pipe(skip(1)).subscribe(s => setState(s));
-      return () => sub.unsubscribe();
-    });
-    const newSetState = state => subject.next(state);
-    return [value, newSetState];   
-};
+import { useSharedState } from './utils'
+import {activeCategorySubject} from './store'
 
 const CategoryBar = ({active}) => {
     const [cat, setCat] = useSharedState(activeCategorySubject)

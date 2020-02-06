@@ -2,6 +2,8 @@ import React from 'react';
 import NewsList from './News'
 import TweetList from './Tweets'
 import Jumbotron from 'react-bootstrap/Jumbotron';
+import { useSharedState } from './utils'
+import {activeCategorySubject} from './store'
 
 const Event = ({event, news, tweets}) => {  
   return (
@@ -16,17 +18,24 @@ const Event = ({event, news, tweets}) => {
     </Jumbotron>
 )}
 
-const EventList = ({events, news, tweets}) => (
+const EventList = ({events, news, tweets}) => {
+  const [cat, setCat] = useSharedState(activeCategorySubject)
+
+  return (
   <ul>
-    {events.map(item => { 
-      const eventNews = news.filter(n => n.event_id === item.id);
-      const eventTweets = tweets.filter(i => i.event_id === item.id);
-      return (
-        <Event key={item.id} event={item} news={eventNews} tweets={eventTweets}/>
-      )}
+    { events.map(item => { 
+        const catFilter = category_id => cat == 0 || category_id === cat - 1;
+        const eventNews = news.filter(n => n.event_id === item.id && catFilter(n.category_id));
+        const eventTweets = tweets.filter(i => i.event_id === item.id && catFilter(i.category_id));
+
+        if (eventNews.length > 0 || eventTweets.length > 0) 
+          return (
+            <Event key={item.id} event={item} news={eventNews} tweets={eventTweets}/>
+          )
+      }
     )}
   </ul>
-)
+)}
 
 function capitalise(s) {
   const words = s.split(" ")
