@@ -5,6 +5,41 @@ import EventCloud from './EventCloud'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Nav from 'react-bootstrap/Nav'
+// import { BehaviorSubject } from 'rxjs'
+
+// const activeCategorySubject = new BehaviorSubject(0);
+
+// const useSharedState = subject => {
+//     const [value, setState] = useState(subject.getValue());
+//     useEffect(() => {
+//       const sub = subject.pipe(skip(1)).subscribe(s => setState(s));
+//       return () => sub.unsubscribe();
+//     });
+//     const newSetState = state => subject.next(state);
+//     return [value, newSetState];   
+// };
+
+const CategoryBar = ({active}) => {
+    // const [cat, setCat] = useSharedState(activeCategorySubject)
+    const setCat = cat => console.log("set active index to" + cat)
+    console.log("active index is: " + active)
+
+    const categories = ["all", "business", "entertainment", "health", "tech & sci", "environment", "lgbt", "youth"]
+    const variants = ["primary", "danger", "success", "secondary", "warning", "info", "dark", "light"]
+
+    return (
+        <Nav variant="tabs" onSelect={selectedKey => setCat(selectedKey)}>
+            {categories.map((cat, i) => {
+                return (
+                    <Nav.Item>
+                        <Nav.Link eventKey={i} active={i==active}>{cat}</Nav.Link>
+                    </Nav.Item>                    
+                )}
+            )}
+        </Nav>
+    )
+}
 
 const Dashboard = () => {
     const [ready, setReady] = React.useState(false)
@@ -12,6 +47,9 @@ const Dashboard = () => {
     const [events, setEvents] = React.useState([])
     const [tweets, setTweets] = React.useState([])
     const [error, setError] = React.useState(null)
+
+    // const [cat, setCat] = useSharedState(activeCategorySubject)
+    const cat = 0
 
     const fetchData = async () => {
         try {
@@ -43,6 +81,7 @@ const Dashboard = () => {
 
         <div id="content">
             <div id="left">
+                <div className="categoryBar"><CategoryBar active={cat}/></div>
                 <EventCloud events={events} />
             </div>
             <div id="right">

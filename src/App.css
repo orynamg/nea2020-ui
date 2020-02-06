@@ -94,3 +94,8 @@
   overflow-y: scroll;
   width: 50%;
 }
+
+.categoryBar {
+  margin-top: 1rem;
+  /* border: red 1px solid; */
+}
