@@ -65,17 +65,15 @@ const Dashboard = () => {
     if (error) return <p>Oops, something went wrong!</p>
 
     return (
-
         <div id="content">
             <div id="left">
                 <div className="categoryBar"><CategoryBar active={cat}/></div>
-                <EventCloud events={events} />
+                <EventCloud events={events} news={news} tweets={tweets} />
             </div>
             <div id="right">
                 <EventList events={events} news={news} tweets={tweets}/>
             </div>
         </div>
-        
     )
 }
 
