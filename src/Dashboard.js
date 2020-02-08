@@ -1,27 +1,26 @@
 import React from 'react';
-// import NewsList from './News'
 import EventList from './Events'
 import EventCloud from './EventCloud'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Container from 'react-bootstrap/Container'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 import Nav from 'react-bootstrap/Nav'
 import { useSharedState } from './utils'
 import {activeCategorySubject} from './store'
 
 const CategoryBar = ({active}) => {
-    const [cat, setCat] = useSharedState(activeCategorySubject)
+    const [, setCat] = useSharedState(activeCategorySubject)
     console.log("active index is: " + active)
 
     const categories = ["all", "business", "entertainment", "health", "tech & sci", "environment", "lgbt", "youth"]
-    const variants = ["primary", "danger", "success", "secondary", "warning", "info", "dark", "light"]
+    // const variants = ["primary", "danger", "success", "secondary", "warning", "info", "dark", "light"]
 
     return (
         <Nav variant="tabs" onSelect={selectedKey => setCat(selectedKey)}>
             {categories.map((cat, i) => {
                 return (
-                    <Nav.Item>
-                        <Nav.Link eventKey={i} active={i==active}>{cat}</Nav.Link>
+                    <Nav.Item key={i}>
+                        <Nav.Link eventKey={i} active={i===active}>{cat}</Nav.Link>
                     </Nav.Item>                    
                 )}
             )}
@@ -36,7 +35,7 @@ const Dashboard = () => {
     const [tweets, setTweets] = React.useState([])
     const [error, setError] = React.useState(null)
 
-    const [cat, setCat] = useSharedState(activeCategorySubject)
+    const [cat, ] = useSharedState(activeCategorySubject)
 
     const fetchData = async () => {
         try {
@@ -64,21 +63,28 @@ const Dashboard = () => {
     if (!ready) return <p>Loading...</p>
     if (error) return <p>Oops, something went wrong!</p>
 
+    const hasActiveCategory = obj => cat == 0 || obj.category_id === cat - 1;
+    const activeNews = news.filter(hasActiveCategory);
+    const activeTweets = tweets.filter(hasActiveCategory);
+    const activeEvents = events.filter(event => 
+                                        activeNews.some(i => i.event_id === event.id) 
+                                        || activeTweets.some(i => i.event_id === event.id));
+
     return (
         <div id="content">
             <div id="left">
                 <div className="categoryBar"><CategoryBar active={cat}/></div>
-                <EventCloud events={events} news={news} tweets={tweets} />
+                <EventCloud events={activeEvents}/>
             </div>
             <div id="right">
-                <EventList events={events} news={news} tweets={tweets}/>
+                <EventList events={activeEvents} news={activeNews} tweets={activeTweets}/>
             </div>
         </div>
     )
 }
 
-function sleep(duration) {
-    return new Promise(resolve => setTimeout(resolve, duration));
-}
+// function sleep(duration) {
+//     return new Promise(resolve => setTimeout(resolve, duration));
+// }
 
 export default Dashboard;
